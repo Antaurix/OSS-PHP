@@ -11,13 +11,15 @@
       echo template("templates/partials/header.php");
       echo template("templates/partials/nav.php");
 
+      // Escape user input
+      $studentId = mysqli_real_escape_string($conn, $_SESSION['id']);
+
       // Build SQL statment that selects a student's modules
       $sql = "select * from studentmodules sm, module m where m.modulecode = sm.modulecode and sm.studentid = '" . $_SESSION['id'] ."';";
-
       $result = mysqli_query($conn,$sql);
 
       // prepare page content
-      $data['content'] .= "<table border='1'>";
+      $data['content'] .= "<table class='table table-secondary' border='1'>";
       $data['content'] .= "<tr><th colspan='5' align='center'>Modules</th></tr>";
       $data['content'] .= "<tr><th>Code</th><th>Type</th><th>Level</th></tr>";
       // Display the modules within the html table

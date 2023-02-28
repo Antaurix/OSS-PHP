@@ -11,6 +11,9 @@ if (isset($_SESSION['id'])) {
    echo template("templates/partials/header.php");
    echo template("templates/partials/nav.php");
 
+   // Escape user input
+   $studentId = mysqli_real_escape_string($conn, $_SESSION['id']);
+
    // if the form has been submitted
    if (isset($_POST['submit'])) {
 
@@ -56,7 +59,7 @@ if (isset($_SESSION['id'])) {
    <input name="txtcountry" type="text"  value="{$row['country']}" /><br/>
    Postcode :
    <input name="txtpostcode" type="text"  value="{$row['postcode']}" /><br/>
-   <input type="submit" value="Save" name="submit"/>
+   <input type="submit" class="btn btn-success" value="Save" name="submit"/>
    </form>
 
 EOD;

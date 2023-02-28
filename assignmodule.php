@@ -11,6 +11,9 @@ if (isset($_SESSION['id'])) {
    echo template("templates/partials/header.php");
    echo template("templates/partials/nav.php");
 
+    // Escape user input
+    $studentId = mysqli_real_escape_string($conn, $_SESSION['id']);
+
    // If a module has been selected
    if (isset($_POST['selmodule'])) {
       $sql = "insert into studentmodules values ('" .  $_SESSION['id'] . "','" . $_POST['selmodule'] . "');";
@@ -32,7 +35,7 @@ if (isset($_SESSION['id'])) {
         $data['content'] .= "<option value='$row[modulecode]'>$row[name]</option>";
      }
      $data['content'] .= "</select><br/>";
-     $data['content'] .= "<input type='submit' name='confirm' value='Save' />";
+     $data['content'] .= "<input type='submit' name='confirm' class='btn btn-success' value='Save' />";
      $data['content'] .= "</form>";
    }
 
